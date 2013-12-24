@@ -4,6 +4,14 @@ import sys
 import urllib, urllib2
 import requests
 
+def gotrobots(site):
+	robotsite = site + '/robots.txt'
+	response = requests.get(robotsite)
+	if response.status_code == 200:
+	    getrobots(site)
+	else:
+	  print "No robots.txt"
+
 def getrobots(site):
 	robotsite = site + '/robots.txt'
 	response = urllib2.urlopen(robotsite)
@@ -30,7 +38,7 @@ def getrobots(site):
 
 def main():
     if len(sys.argv) >= 2:
-        getrobots(sys.argv[1])
+        gotrobots(sys.argv[1])
 
 if __name__ == '__main__':
 	main()
